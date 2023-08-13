@@ -1,7 +1,6 @@
 const PersonModel = require("./person.schema.js");
 
 const functions = {
-
   // function to save a person
   save() {
     const newPerson = new PersonModel({
@@ -58,16 +57,14 @@ const functions = {
       });
   },
 
-// function to find person wuth a name
+  // function to find person with a name
   findPersonByName(name) {
     PersonModel.findOne({ name })
-      .then((people) => {
-        console.log(`Person with the name "${name}":`, people);
-
-        return people;
+      .then((person) => {
+        console.log(`Person with the name "${name}":`, person);
       })
       .catch((error) => {
-        console.error("Error finding people:", error);
+        console.error("Error finding person:", error);
       });
   },
 
@@ -76,40 +73,38 @@ const functions = {
     PersonModel.findById(id)
       .then((person) => {
         console.log(`Person with the id "${id}":`, person);
-
-        return person;
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Error finding person:", error);
       });
   },
 
-  // function to find to find person by id and update a person name
+  // function to update a person's name by id
   updatePerson(id, name) {
-    Person.findOneAndUpdate(
-      { _id: personId },
+    PersonModel.findOneAndUpdate(
+      { _id: id },
       { $set: { name } },
       { new: true },
       (error, updatedPerson) => {
         if (error) {
-          console.error('Error updating person:', error)
+          console.error("Error updating person:", error);
         } else {
-          console.log("Person delete successfully");        }
+          console.log("Person updated successfully:", updatedPerson);
+        }
       }
     );
-  }
+  },
 
-  // function to find a person by id and also delete that person
-  findByIdAndRemove() {
+  // function to find a person by id and delete
+  findByIdAndRemove(personId) {
     PersonModel.findByIdAndRemove(personId, (error, removedPerson) => {
       if (error) {
         console.error("Error removing person:", error);
       } else {
-        console.log("Person delete successfully");
+        console.log("Person deleted successfully.");
       }
     });
   },
 };
 
-
-module.exports = functions
+module.exports = functions;
