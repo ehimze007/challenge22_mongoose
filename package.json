@@ -1,0 +1,11 @@
+{
+  "name": "challenge22_mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mongodb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nathanael Ehimze",
+  "license": "ISC"
+}
